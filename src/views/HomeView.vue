@@ -1,5 +1,8 @@
 <template>
-  <MovieList @showMovieDetailEmit="showMovieDetail"></MovieList>
+  <MovieSearch @searchMovieEmit="setMovieSearch"></MovieSearch>
+
+  <MovieList @showMovieDetailEmit="showMovieDetail" :recherche="this.recherche"></MovieList>
+
   <v-dialog v-model="visible">
     <MovieDetail @closeMovieDetailEmit="closeMovieDetail" v-if="visible===true" :movieId="selectedMovieId"></MovieDetail>
   </v-dialog>
@@ -8,15 +11,17 @@
 <script>
 import MovieDetail from '@/components/MovieDetail.vue';
 import MovieList from '@/components/MovieList.vue';
+import MovieSearch from '@/components/MovieSearch.vue';
 
 
 export default {
     name: 'HomeView',
-    components: { MovieList, MovieDetail },
+    components: { MovieList, MovieDetail, MovieSearch },
     data(){
       return{
         visible : false,
-        selectedMovieId : 0
+        selectedMovieId : 0,
+        recherche : ""
       }
     },
     methods:{
@@ -26,6 +31,9 @@ export default {
       },
       closeMovieDetail(){
         this.visible = false;
+      },
+      setMovieSearch(val){
+        this.recherche = val;
       }
     }
 }
