@@ -6,25 +6,24 @@
                     <v-card-title>{{ result.title }}</v-card-title>
                     <v-img :src="this.photopath + result.poster_path"
                     width="300"></v-img>
-                    <v-btn :width="500">PLUS D'INFOS</v-btn>
+                    <v-btn @click=sendMovie(result.id) :width="500">PLUS D'INFOS</v-btn>
                 </v-card>
             </v-col>
         </v-row>  
     </v-container>
-    <MovieDetail v-if="selectMovieId !== null" :movieId="selectMovieId"></MovieDetail>
 </template>
 
 <script>
-
+import MovieDetail from './MovieDetail.vue';
 import axios from 'axios';
 import config from '../config.json';
 export default {
     name: 'MovieList',
+    components: { MovieDetail },
     data(){
         return{
             results : '',
-            photopath : '',
-            selectMovieId : null
+            photopath : ''
         }
     },
     created(){
@@ -37,6 +36,14 @@ export default {
             this.photopath = config.url.photo_path;
             this.results = res.data.results;
         })
+    },
+    methods:{
+        sendMovie(selectMovieId){
+            this.$emit('showMovieDetailEmit', selectMovieId);
+        },
+        closeMovieDetail(){
+            
+        }
     }
 }
 

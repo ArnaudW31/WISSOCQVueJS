@@ -1,17 +1,16 @@
 <template>
 <div>
-  <MovieList></MovieList>
+  <HomeView></HomeView>
 </div>
 </template>
 
 <script>
-import MovieList from './components/MovieList.vue';
-import MovieDetail from './components/MovieDetail.vue'
+import HomeView from './views/HomeView.vue';
 
 export default {
     name: 'App',
     el: "#app",
-    components: { MovieList }
+    components: { HomeView }
 }
 </script>
 <style>
